@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { provide, ref, readonly } from 'vue'
+import { provide, shallowRef, readonly } from 'vue'
 
-const tabs = ref<string[]>([])
-const activeTab = ref<string>()
+const tabs = shallowRef<string[]>([])
+const activeTab = shallowRef<string>('')
 
 function activateTab(title: string) {
     activeTab.value = title
@@ -23,7 +23,11 @@ provide(injectionKey, {
 import type { InjectionKey, Ref } from 'vue'
 
 // type the injection key here 👇
-export const injectionKey = Symbol('vTabs')
+export const injectionKey = Symbol('vTabs') as InjectionKey<{
+    registerTab: (title: string) => void
+    activateTab: (title: string) => void
+    activeTab: Ref<string>
+}>
 </script>
 <template>
     <div class="tabs">

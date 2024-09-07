@@ -18,7 +18,9 @@ if (!tabsProvider.activeTab.value) {
     tabsProvider.activateTab(props.title)
 }
 
-const isActive = computed(() => tabsProvider.activeTab.value === props.title)
+const isActive = computed<boolean>(() => {
+    return tabsProvider.activeTab.value === props.title
+})
 </script>
 <template>
     <div class="tab-content" v-show="isActive">
